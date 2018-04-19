@@ -43,7 +43,7 @@
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('loginGithub') }}">GitHub</a></li>
+                            <li><a class="nav-link" href="login/github">GitHub</a></li>
                             
 
                         @else

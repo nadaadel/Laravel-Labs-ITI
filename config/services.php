@@ -36,7 +36,7 @@ return [
     ],
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),         // Your GitHub Client ID
-        'client_secret' => env('GITHUB  _CLIENT_SECRET'), // Your GitHub Client Secret
+        'client_secret' => env('GITHUB_CLIENT_SECRET'), // Your GitHub Client Secret
         'redirect' => 'http://127.0.0.1:8000/posts',
     ],
     

@@ -1,6 +1,6 @@
 <?php
-Route::get('login/github', 'Auth\SocialusersController@redirectToProvider')->name('loginGithub');
-Route::get('login/github/callback', 'Auth\SocialusersController@handleProviderCallback');
+Route::get('login/{provider}',          'Auth\SocialAccountController@redirectToProvider')->name('loginGithub');
+Route::get('login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback');
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/posts' , 'PostsController@index');
@@ -13,8 +13,8 @@ Route::delete('/post/delete/{id}' , 'PostsController@destroy')->middleware('auth
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/post/comments/create/{id}' , 'CommentController@store');
 
-/*
 
+/*
 use App\Task;
 // Route::get('/login', 'SessionController@create')->name('login');
 // Route::get('/register', 'RegisterController@create')->name('regitser');
