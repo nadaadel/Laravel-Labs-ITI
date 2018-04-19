@@ -1,4 +1,6 @@
 <?php
+Route::get('login/github', 'Auth\SocialusersController@redirectToProvider')->name('loginGithub');
+Route::get('login/github/callback', 'Auth\SocialusersController@handleProviderCallback');
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/posts' , 'PostsController@index');
@@ -9,6 +11,7 @@ Route::get('/post/{id}' , 'PostsController@show')->middleware('auth');
 Route::post('/post/edit/{id}' , 'PostsController@update')->middleware('auth');		
 Route::delete('/post/delete/{id}' , 'PostsController@destroy')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/post/comments/create/{id}' , 'CommentController@store');
 
 /*
 

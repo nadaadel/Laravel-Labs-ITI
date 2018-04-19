@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Comment;
 use Auth;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Controllers\Storage;
 
 
 class PostsController extends Controller
@@ -20,15 +22,23 @@ class PostsController extends Controller
         return view('posts.list' , compact('posts'));
     }
     public function create(StorePostRequest $request){
-  
-        $input = $request->only(['title' , 'body']);
-        $input->user_id = Auth::user()->id;
+        // $input = $request->only(['title' , 'body']);
+        // $input->user_id = Auth::user()->id;
         $newPost = new Post();
         $newPost->title  = $request->input('title');
-        $newPost->user_id  =  $user_id;
+        $newPost->user_id  =  Auth::user()->id;
         $newPost->body  = $request->input('body');
+        $path = $request->file('image')->store('public/uploads');
+        $newPost->image = $path;  
+        // $photoName->store('public/uploads');
+        // Storage::disk('local')->put('imaget', $photoName);
+        // Storage::disk('local')->put($photoName, file_get_contents($request->file('image')));
+    // $photo->move(public_path('uploads'), $photoPath);
+        // $newPost->attachTag('tag3');
         $newPost->save();
-        return redirect('/posts');
+
+       return redirect('/posts')
+;
     }
 
     public function getAdd(){
@@ -41,7 +51,8 @@ class PostsController extends Controller
     }
     public function show($id){
         $post = Post::find($id);
-        return view('posts.show' , compact('post'));
+        $comments = Comment::all()->where('post_id' , $id);
+        return view('posts.show' , compact('post' , 'comments'));
     }
     public function update(UpdatePostRequest $request , $id){
        $update = Post::find($id);

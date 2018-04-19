@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use Auth;
 
 class CommentController extends Controller
 {
@@ -14,9 +15,10 @@ class CommentController extends Controller
     {
     	Comment::create([ 
             'body' => request('body'),
-            'task_id' => $id,
-            'user_id' => 1
-    		]);
-    	return back();
+            'post_id' => $id,
+            'user_id' => Auth::user()->id
+            ]);
+            
+    	return redirect('/post/'.$id);
     }
 }

@@ -25,7 +25,7 @@
         <td><a href="/post/{{$post->id}}"> {{$post->title}} </a></td>
         <td> {{$post->slug}} </td>        
         <td>{{$post->user->name}}</td>
-        <td>{{$post->created_at->format('Y-m-d') }}</td>
+        <td>{{$post->Date_Acc }}</td>
         <td> <form action="/post/{{$post->id}}" method="get">
           @csrf
           <input class="btn btn-primary"type="submit" value="View">
